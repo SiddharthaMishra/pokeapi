@@ -150,9 +150,9 @@ class Game(DateTimeModel):
 
     name = models.CharField(max_length=50)
 
-    generation = models.IntegerField(max_length=4)
+    generation = models.IntegerField()
 
-    release_year = models.IntegerField(max_length=6)
+    release_year = models.IntegerField()
 
 
 class Description(DateTimeModel):
@@ -164,7 +164,7 @@ class Description(DateTimeModel):
 
     description = models.TextField(max_length=200)
 
-    game = models.ManyToManyField(Game, blank=True, null=True)
+    game = models.ManyToManyField(Game, blank=True)
 
     def get_game_details(self):
         lst = []
@@ -203,9 +203,9 @@ class Move(DateTimeModel):
 
     description = models.TextField(max_length=200)
 
-    etype = models.ManyToManyField(Type, null=True)
+    etype = models.ManyToManyField(Type, blank=True)
 
-    pp = models.IntegerField(max_length=5)
+    pp = models.IntegerField()
 
     CATEGORY = (
         ('physical', 'physical'),
@@ -215,9 +215,9 @@ class Move(DateTimeModel):
 
     category = models.CharField(choices=CATEGORY, max_length=10)
 
-    power = models.IntegerField(max_length=6)
+    power = models.IntegerField()
 
-    accuracy = models.IntegerField(max_length=6)
+    accuracy = models.IntegerField()
 
 
 class Sprite(DateTimeModel):
@@ -257,7 +257,7 @@ class Pokemon(DateTimeModel):
 
     name = models.CharField(max_length=50)
 
-    pkdx_id = models.IntegerField(max_length=4, blank=True)
+    pkdx_id = models.IntegerField(blank=True)
 
     species = models.CharField(max_length=30)
 
@@ -267,11 +267,11 @@ class Pokemon(DateTimeModel):
 
     ev_yield = models.CharField(max_length=20)
 
-    catch_rate = models.IntegerField(max_length=4)
+    catch_rate = models.IntegerField()
 
-    happiness = models.IntegerField(max_length=4)
+    happiness = models.IntegerField()
 
-    exp = models.IntegerField(max_length=5)
+    exp = models.IntegerField()
 
     GROWTHS = (
         ('slow', 'slow'),
@@ -285,24 +285,23 @@ class Pokemon(DateTimeModel):
 
     male_female_ratio = models.CharField(max_length=10)
 
-    hp = models.IntegerField(max_length=4)
+    hp = models.IntegerField()
 
-    attack = models.IntegerField(max_length=4)
+    attack = models.IntegerField()
 
-    defense = models.IntegerField(max_length=4)
+    defense = models.IntegerField()
 
-    sp_atk = models.IntegerField(max_length=4)
+    sp_atk = models.IntegerField()
 
-    sp_def = models.IntegerField(max_length=4)
+    sp_def = models.IntegerField()
 
-    speed = models.IntegerField(max_length=4)
+    speed = models.IntegerField()
 
-    total = models.IntegerField(max_length=6)
+    total = models.IntegerField()
 
-    egg_cycles = models.IntegerField(max_length=6)
+    egg_cycles = models.IntegerField()
 
-    abilities = models.ManyToManyField(
-        Ability, blank=True,  null=True)
+    abilities = models.ManyToManyField(Ability, blank=True)
 
     def ability_names(self):
         lst = []
@@ -339,8 +338,7 @@ class Pokemon(DateTimeModel):
 
     evolutions = property(fget=get_evolution_details)
 
-    types = models.ManyToManyField(
-        Type, blank=True,  null=True)
+    types = models.ManyToManyField(Type, blank=True)
 
     def type_list(self):
         lst = []
@@ -353,8 +351,7 @@ class Pokemon(DateTimeModel):
 
     type_list = property(fget=type_list)
 
-    egg_group = models.ManyToManyField(
-        EggGroup, blank=True,  null=True)
+    egg_group = models.ManyToManyField(EggGroup, blank=True)
 
     def get_eggs(self):
 
@@ -368,8 +365,7 @@ class Pokemon(DateTimeModel):
 
     eggs = property(fget=get_eggs)
 
-    descriptions = models.ManyToManyField(
-        Description, blank=True,  null=True)
+    descriptions = models.ManyToManyField(Description, blank=True)
 
     def get_sprites(self):
         lst = []
@@ -382,8 +378,7 @@ class Pokemon(DateTimeModel):
 
     my_sprites = property(fget=get_sprites)
 
-    sprites = models.ManyToManyField(
-        Sprite, blank=True,  null=True)
+    sprites = models.ManyToManyField(Sprite, blank=True)
 
     def get_moves(self):
 
@@ -427,7 +422,7 @@ class Evolution(DateTimeModel):
         ('other', 'other'),
     )
 
-    level = models.IntegerField(max_length=3, default=0)
+    level = models.IntegerField(default=0)
 
     method = models.CharField(
         choices=EVOLV_METHODS, max_length=10, default=0)
@@ -457,8 +452,7 @@ class MovePokemon(DateTimeModel):
     learn_type = models.CharField(
         choices=LEARN, max_length=15, default='level up')
 
-    level = models.IntegerField(
-        max_length=6, default=0, null=True, blank=True)
+    level = models.IntegerField(default=0, null=True, blank=True)
 
 
 class Pokedex(DateTimeModel):

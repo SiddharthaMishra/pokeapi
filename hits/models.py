@@ -30,6 +30,6 @@ class ResourceView(models.Model):
     def __unicode__(self):
         return '{} - {}'.format(str(self.date), str(self.count))
 
-    count = models.IntegerField(max_length=1000, default=0)
-    version = models.IntegerField(max_length=1, default=1)
+    count = models.IntegerField(default=0)
+    version = models.IntegerField(default=1)
     date = models.DateField(auto_now=True)
